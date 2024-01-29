@@ -31,7 +31,8 @@ User.init({
 },{
     sequelize,
     modelName: 'User',
-    books: {
+    tableName: 'Users',
+    hooks: {
         beforeSave: async(user) => {
             if(user.password){
                 user.password = await bcrypt.hash(user.password, 8);
