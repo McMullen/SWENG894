@@ -5,6 +5,7 @@ const port = 3000;
 const app = express();
 app.use(express.json());
 require('./routes')(app);
+require('dotenv').config();
 
 module.exports = app;
 
