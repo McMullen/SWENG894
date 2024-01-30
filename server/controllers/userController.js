@@ -3,7 +3,9 @@ const authService = require('../services/authService');
 
 exports.register = async(req, res) => {
     try{
-        const newUser = new userModel(req.body);
+        const { user } = req.body;
+        const { name, email, password } = user;
+        const newUser = new userModel(user);
         await newUser.save();
 
         res.status(201).json({
