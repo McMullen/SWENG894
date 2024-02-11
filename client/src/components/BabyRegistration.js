@@ -26,7 +26,7 @@ const BabyRegistration = () => {
                     'Authorization': 'Bearer ${getAuthToken()}'
                 }
             };
-            const body = JSON.stringify(formData);
+            const body = JSON.stringify({baby: formData});
             const res = await axios.post('/api/baby/add', body, config);
             console.log(res.data);
         }catch(err){

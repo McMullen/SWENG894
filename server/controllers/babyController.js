@@ -1,9 +1,11 @@
 const babyModel = require('../models/BabyModel');
+const authService = require('../services/authService');
 
 exports.add = async(req, res) => {
+    if(!authService.isA)
+    
     try{
-        console.log(req.body);
-        //const {baby} = req.body;
+        const {baby} = req.body;
         const {babyName, birthDate, sex, birthWeight, birthHeight} = baby;
         const newBaby = new babyModel(baby);
         await baby.save();
