@@ -4,7 +4,6 @@ const authService = require('../services/authService');
 exports.add = async(req, res) => {
     try{
         const userId = req.userId;
-        console.log(userId);
         const { baby } = req.body;
         const { babyName, birthDate, sex, birthWeight, birthHeight } = baby;
         const babyDetails = {...baby, userId};
