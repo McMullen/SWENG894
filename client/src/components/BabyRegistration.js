@@ -23,7 +23,7 @@ const BabyRegistration = () => {
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ${getAuthToken()}'
+                    'Authorization': `Bearer ${getAuthToken()}`
                 }
             };
             const body = JSON.stringify({baby: formData});
