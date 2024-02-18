@@ -19,19 +19,30 @@ Milestone.init({
             key: 'id',
         },
     },
-    babyName: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
             notEmpty: true,
         },
     },
-    birthDate: {
+    date: {
         type: DataTypes.DATE,
         allowNull: false,
         validate: {
             notEmpty: true,
         },
+    },
+    type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        },
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 },{
         sequelize,
