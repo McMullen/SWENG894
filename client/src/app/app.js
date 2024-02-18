@@ -1,18 +1,24 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginForm from '../components/auth/LoginForm';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import LoginForm from '../components/Login/LoginForm';
 import RegistrationForm from '../components/auth/RegistrationForm';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Layout from '../components/Layout';
 import Dashboard from '../components/Dashboard'
 import BabyRegistration from '../components/BabyRegistration';
 
+//function App(){
+const App = () => {
+    const NavigateToRegister = () => {
+        const navigate = useNavigate();
+        const handleNavigateToRegister = () => navigate('/register');
+        return <LoginForm onNavigateToRegister={handleNavigateToRegister} />;
+    };
 
-function App(){
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<LoginForm />} />
+                <Route path="/" element={<NavigateToRegister />} />
                 <Route path="/register" element={<RegistrationForm />} />
                 <Route element={<Layout />}>
                     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
@@ -21,6 +27,6 @@ function App(){
             </Routes>
         </BrowserRouter>
     );
-}
+};
 
 export default App;
