@@ -51,3 +51,25 @@ exports.getBabyInfo = async (req, res) => {
         res.status(500).json({ message: 'Error fetching baby information', error: error.message });
     }
 };
+
+exports.newMilestone = async(req, res) => {
+    try{
+        const babyId = req.babyId;
+        const { milestone } = req.body;
+        const milestoneDetails = {...milestone, babyId};
+        const newMilestone = new milestoneModel(milestoneDetails);
+        await newMilestone.save();
+
+        res.status(201).json({
+            success: true,
+            message: 'Milestone registered syccessfully',
+            data: newMilestone
+        });
+    }catch(error){
+        res.status(500).json({
+            success: false,
+            message: 'Adding a new milestone failed',
+            error: error.message
+        });
+    }
+};
