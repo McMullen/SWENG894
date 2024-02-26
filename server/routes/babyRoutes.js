@@ -6,5 +6,6 @@ const babyController = require('../controllers/babyController');
 router.post('/add', authMiddleware, babyController.add);
 
 router.get('/user/babies', authMiddleware, babyController.getBabiesForUser);
+router.get('/babyInfo/:babyId', authMiddleware, babyController.getBabyInfo);
 
 module.exports = router;

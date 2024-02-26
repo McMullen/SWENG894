@@ -19,7 +19,7 @@ const Dashboard = () => {
                         'Authorization': `Bearer ${getAuthToken()}`
                     }
                 };
-                const res = await axios.get('/api/user/babies', config);
+                const res = await axios.get('/api/baby/user/babies', config);
                 setBabies(res.data);
             }catch(error){
                 console.error('Error fetching babies', error.response?.data);
