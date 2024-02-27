@@ -4,7 +4,7 @@ import LoginForm from '../components/Login/LoginForm';
 import RegistrationForm from '../components/auth/RegistrationForm';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Layout from '../components/Layout';
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/Dashboard/Dashboard'
 import BabyRegistration from '../components/BabyRegistration';
 import BabyDashboard from '../components/BabyDashboard';
 

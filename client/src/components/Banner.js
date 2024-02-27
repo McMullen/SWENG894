@@ -10,10 +10,20 @@ const Banner = () => {
     };
 
     return(
-        <div style={{ backgroundColor: 'blue', color: 'white', padding: '10px' }}>
-            <h1>Baby Bytes</h1>
-            <button onClick={handleLogout}>Logout</button>
+        <div style={{ 
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '10px 20px',
+            background: '#eee'
+        }}>
+            <h1 style={{ margin: 0 }}>Baby Bytes</h1>
+            <button onClick={handleLogout} style={{
+                padding: '10px 20px',
+                cursor: 'pointer',
+            }}>Logout</button>
         </div>
+        
     );
 };
 

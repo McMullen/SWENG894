@@ -1,50 +1,40 @@
-  .login-container {
+.registration-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    flex-direction: column;
   }
   
-  .login-box {
-    border: 1px solid black;
+  .registration-box {
     padding: 20px;
+    border: 1px solid black;
     border-radius: 8px;
-  }
-  
-  .login-title {
+    width: 300px;
     text-align: center;
   }
   
-  .login-form {
+  .registration-form {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    gap: 10px;
   }
   
-  .login-input {
-    margin: 10px 0;
+  .registration-form input {
     padding: 10px;
     font-size: 16px;
   }
   
-  .login-button, .signup-button {
+  .register-button {
     padding: 10px;
     font-size: 16px;
-    margin: 10px 0;
-  }
-
-  .login-button {
     color: white;
     background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
   
-  .signup-button {
-    display: block;
-    width: 100%;
-  }
-  
-  .login-or {
-    text-align: center;
+  .register-button:hover {
+    background-color: #0056b3;
   }
   
