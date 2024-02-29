@@ -6,7 +6,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import Layout from '../components/Layout';
 import Dashboard from '../components/Dashboard/Dashboard'
 import BabyRegistration from '../components/BabyRegistration';
-import BabyDashboard from '../components/BabyDashboard';
+import BabyDashboard from '../components/BabyDashboard/BabyDashboard';
 
 //function App(){
 const App = () => {
