@@ -1,23 +1,43 @@
-.dashboard-container {
+.user-dashboard {
     display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-.dashboard-main {
-    display: flex;
-    flex-grow: 1;
-}
-
-.baby-list {
-    flex-basis: 30%;
-    border-right: 1px solid #ddd;
+    justify-content: space-between;
+    margin: 20px;
+  }
+  
+  .baby-list, .baby-info {
+    border: 1px solid black;
     padding: 20px;
+    height: 500px;
     overflow-y: auto;
-}
+  }
 
-.baby-info {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-y: auto;
-}
+  .baby-list {
+    width: 40%;
+  }
+  
+  .baby-info {
+    width: 55%;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+  
+  li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .add-baby-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+  }
+  

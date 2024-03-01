@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getAuthToken } from '../../services/auth';
 import { formatDate, calculateAge } from '../../utils/dateUtils';
 import './BabyDashboardStyles.css';
 
 const BabyDashboard = () => {
+  const navigate = useNavigate();
   const [babyInfo, setBabyInfo] = useState(null);
   const { babyId } = useParams();
+
+  const goToUserDashboard = () => {
+    navigate('/dashboard');
+  };
 
   useEffect(() => {
       const fetchBabyInfo = async () => {
@@ -48,6 +53,9 @@ const BabyDashboard = () => {
           {/* List of medications */}
           <button className="new-medication">New Medication</button>
         </div>
+      </div>
+      <div className="back-to-dashboard">
+        <button onClick={goToUserDashboard} className="dashboard-button">Back</button>
       </div>
     </div>
   );

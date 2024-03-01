@@ -6,7 +6,7 @@
   }
   
   .baby-details {
-    border: 1px solid #ccc;
+    border: 0 solid transparent;
     padding: 20px;
     margin-bottom: 20px;
   }
@@ -18,7 +18,7 @@
   
   .milestones, .medications {
     flex-basis: calc(50% - 10px);
-    border: 1px solid #ccc;
+    border: 1px solid black;
     padding: 20px;
     margin-right: 10px;
   }
@@ -34,3 +34,15 @@
     cursor: pointer;
   }
   
+  .back-to-dashboard {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding: 10px 0;
+  }
+  
+  .dashboard-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 10px;
+  }
