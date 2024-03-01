@@ -7,7 +7,7 @@
   .baby-list, .baby-info {
     border: 1px solid black;
     padding: 20px;
-    height: 500px;
+    max-height: 500px;
     overflow-y: auto;
   }
 
