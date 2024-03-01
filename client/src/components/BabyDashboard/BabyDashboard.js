@@ -14,6 +14,10 @@ const BabyDashboard = () => {
     navigate('/dashboard');
   };
 
+  const goToNewMilestone = () => {
+    navigate(`/new-milestone/${babyId}`);
+  };
+
   useEffect(() => {
       const fetchBabyInfo = async () => {
           try {
@@ -46,7 +50,7 @@ const BabyDashboard = () => {
         <div className="milestones">
           <h2>Milestones</h2>
           {/* List of milestones */}
-          <button className="new-milestone">New Milestone</button>
+          <button onClick={goToNewMilestone} className="new-milestone">New Milestone</button>
         </div>
         <div className="medications">
           <h2>Medications</h2>

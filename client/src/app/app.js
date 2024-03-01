@@ -5,8 +5,9 @@ import RegistrationForm from '../components/auth/RegistrationForm';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Layout from '../components/Layout';
 import Dashboard from '../components/Dashboard/Dashboard'
-import BabyRegistration from '../components/BabyRegistration';
+import BabyRegistration from '../components/BabyRegistration/BabyRegistration';
 import BabyDashboard from '../components/BabyDashboard/BabyDashboard';
+import MilestoneForm from '../components/Milestone/MilestoneForm';
 
 //function App(){
 const App = () => {
@@ -25,6 +26,8 @@ const App = () => {
                     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/add-baby" element={<ProtectedRoute><BabyRegistration /></ProtectedRoute>} />
                     <Route path="/baby/:babyId" element={<BabyDashboard />} />
+                    <Route path="/new-milestone/:babyId" element={<MilestoneForm />} />
+                    <Route path="/update-milestone/:milestoneId" element={<MilestoneForm />} />
                 </Route>
             </Routes>
         </BrowserRouter>

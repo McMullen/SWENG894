@@ -1,7 +1,7 @@
 const {Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/database');
 
-class Baby extends Model{
+class Milestone extends Model{
     static associate(models){
         Milestone.belongsTo(models.Baby, {
             foreignKey: 'babyID',
