@@ -4,8 +4,9 @@ import LoginForm from '../components/Login/LoginForm';
 import RegistrationForm from '../components/auth/RegistrationForm';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Layout from '../components/Layout';
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/Dashboard/Dashboard'
 import BabyRegistration from '../components/BabyRegistration';
+import BabyDashboard from '../components/BabyDashboard/BabyDashboard';
 
 //function App(){
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
                 <Route element={<Layout />}>
                     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/add-baby" element={<ProtectedRoute><BabyRegistration /></ProtectedRoute>} />
+                    <Route path="/baby/:babyId" element={<BabyDashboard />} />
                 </Route>
             </Routes>
         </BrowserRouter>

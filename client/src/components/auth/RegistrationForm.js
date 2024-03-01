@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import './RegistrationStyles.css';
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
@@ -31,42 +32,38 @@ const RegistrationForm = () => {
     };
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={e => onSubmit(e)}>
-                <div>
-                    <label>Name:</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={name}
-                        onChange={e => onChange(e)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={e => onChange(e)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={e => onChange(e)}
-                        required
-                    />
-                </div>
-                <button type="submit">Register</button>
-            </form>
-        </div>
+        <div className="registration-container">
+      <div className="registration-box">
+        <h2>Create a New Account</h2>
+        <form onSubmit={onSubmit} className="registration-form">
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={onChange}
+            placeholder="Name"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            placeholder="Password"
+            required
+          />
+          <button type="submit" className="register-button">Register</button>
+        </form>
+      </div>
+    </div>
     );
 };
 
