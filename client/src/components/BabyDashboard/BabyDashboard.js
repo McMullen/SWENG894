@@ -79,10 +79,10 @@ const BabyDashboard = () => {
         </ul>
           <button onClick={goToNewMilestone} className="new-milestone">New Milestone</button>
         </div>
-        <div className="medications">
-          <h2>Medications</h2>
-          {/* List of medications */}
-          <button className="new-medication">New Medication</button>
+        <div className="health-records">
+          <h2>Health Records</h2>
+          {/* List of health records */}
+          <button className="new-health-record">New Health Record</button>
         </div>
       </div>
       <div className="back-to-dashboard">

@@ -10,7 +10,6 @@ import BabyDashboard from '../components/BabyDashboard/BabyDashboard';
 import MilestoneForm from '../components/Milestone/MilestoneForm';
 import UpdateMilestoneForm from '../components/Milestone/UpdateMilestoneForm';
 
-//function App(){
 const App = () => {
     const NavigateToRegister = () => {
         const navigate = useNavigate();
