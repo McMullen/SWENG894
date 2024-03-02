@@ -5,6 +5,9 @@ const milestoneController = require('../controllers/milestoneController');
 
 router.post('/new/:babyId', authMiddleware, milestoneController.newMilestone);
 
-router.get('/get', authMiddleware, milestoneController.getMilestones);
+router.put('/update/:milestoneId', authMiddleware, milestoneController.updateMilestone);
+
+router.get('/get/:milestoneId', authMiddleware, milestoneController.getMilestone);
+router.get('/get-all/:babyId', authMiddleware, milestoneController.getAllMilestones);
 
 module.exports = router;

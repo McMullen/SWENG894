@@ -7,6 +7,15 @@ export const formatDate = (dateString) => {
   return `${month}-${day}-${year}`;
 };
 
+export const formatCalendarDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (1 + date.getMonth()).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+};
+
 export const calculateAge = (dateOfBirth) => {
   const birthDate = new Date(dateOfBirth);
   const today = new Date();

@@ -19,7 +19,7 @@ const Dashboard = () => {
     };
 
     const handleBabyDashboard = () => {
-        navigate(`/baby/${selectedBaby.id}`);
+        navigate(`/baby-dashboard/${selectedBaby.id}`);
     };
 
     useEffect(() => {

@@ -7,6 +7,7 @@ import './BabyDashboardStyles.css';
 
 const BabyDashboard = () => {
   const navigate = useNavigate();
+  const [milestones, setMilestones] = useState([]);
   const [babyInfo, setBabyInfo] = useState(null);
   const { babyId } = useParams();
 
@@ -16,6 +17,10 @@ const BabyDashboard = () => {
 
   const goToNewMilestone = () => {
     navigate(`/new-milestone/${babyId}`);
+  };
+
+  const goToUpdateMilestone = (milestone) => {
+    navigate(`/update-milestone/${milestone.id}`, {state: {babyId}});
   };
 
   useEffect(() => {
@@ -34,6 +39,22 @@ const BabyDashboard = () => {
       };
 
       fetchBabyInfo();
+
+      const fetchMilestones = async () => {
+        try {
+          const config = {
+            headers: {
+                'Authorization': `Bearer ${getAuthToken()}`
+            }
+          };
+          const res = await axios.get(`/api/milestone/get-all/${babyId}`, config);
+          setMilestones(res.data);
+        } catch (error) {
+          console.error('Error fetching milestones', error.response?.data);
+        }
+      };
+  
+      fetchMilestones();
   }, [babyId]);
 
   if (!babyInfo) return <div>Loading...</div>;
@@ -49,7 +70,13 @@ const BabyDashboard = () => {
       <div className="lower-section">
         <div className="milestones">
           <h2>Milestones</h2>
-          {/* List of milestones */}
+          <ul>
+          {milestones.map((milestone) => (
+            <li key={milestone.id} onClick={() => goToUpdateMilestone(milestone)}>
+              {milestone.name} - Date Achieved: {formatDate(milestone.date)} - Description: {milestone.description}
+            </li>
+          ))}
+        </ul>
           <button onClick={goToNewMilestone} className="new-milestone">New Milestone</button>
         </div>
         <div className="medications">

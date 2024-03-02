@@ -10,12 +10,12 @@ const MilestoneForm = ({ onSave }) => {
     date: '',
     age: '',
     type: '',
-    notes: '',
+    description: '',
   });
 
   const navigate = useNavigate();
   const { babyId } = useParams();
-  const { name, date, age, type, notes } = formData;
+  const { name, date, age, type, description } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,7 +33,7 @@ const MilestoneForm = ({ onSave }) => {
         const body = JSON.stringify({milestone: formData});
         const res = await axios.post(`/api/milestone/new/${babyId}`, body, config);
         console.log(res.data);
-        navigate(`/baby/${babyId}`);
+        navigate(`/baby-dashboard/${babyId}`);
     }catch(err){
         console.error(err.response.data);
     }
@@ -57,7 +57,7 @@ const MilestoneForm = ({ onSave }) => {
             />
           </div>
           <div className="milestone-input">
-            <label>Date: </label>
+            <label>Date Achieved: </label>
             <input
               type="date"
               id="date"
@@ -88,13 +88,13 @@ const MilestoneForm = ({ onSave }) => {
             </select>
           </div>
           <div className="milestone-input">
-            <label>Notes: </label>
+            <label>Description: </label>
             <textarea
-              id="notes"
-              name="notes"
-              value={notes}
+              id="description"
+              name="description"
+              value={description}
               onChange={onChange}
-              placeholder="Notes"
+              placeholder="Description"
               required
             />
           </div>

@@ -33,6 +33,13 @@ Milestone.init({
             notEmpty: true,
         },
     },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    },
     type: {
         type: DataTypes.STRING,
         allowNull: false,
