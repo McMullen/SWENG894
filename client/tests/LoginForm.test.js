@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import LoginForm from '../src/components/Login/LoginForm';
 import { BrowserRouter } from 'react-router-dom';
 
-// Mocking the modules
 jest.mock('axios', () => ({
   post: jest.fn(() => Promise.resolve({ data: { token: 'fakeToken' } })),
 }));
@@ -45,6 +44,4 @@ describe('LoginForm', () => {
     expect(emailInput.value).toBe('test@example.com');
     expect(passwordInput.value).toBe('password');
   });
-
-  // TODO: Additional tests for form submission and navigation implemented here.
 });

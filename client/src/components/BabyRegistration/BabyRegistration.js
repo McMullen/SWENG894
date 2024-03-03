@@ -41,8 +41,9 @@ const BabyRegistration = () => {
                 <h1 className="baby-registration-title">Register New Baby</h1>
                 <form onSubmit={e => onSubmit(e)} className="baby-registration-form">
                     <div className="baby-registration-input">
-                        <label>Baby's Name: </label>
+                        <label htmlFor="babyName">Baby's Name: </label>
                         <input 
+                            id="babyName"
                             type="text"
                             name="babyName"
                             value={babyName}
@@ -51,8 +52,9 @@ const BabyRegistration = () => {
                         />
                     </div>
                     <div className="baby-registration-input">
-                        <label>Birth Date: </label>
+                        <label htmlFor="birthDate">Birth Date: </label>
                         <input
+                            id="birthDate"
                             type="date"
                             name="birthDate"
                             value={birthDate}
@@ -61,16 +63,17 @@ const BabyRegistration = () => {
                         />
                     </div>
                     <div className="baby-registration-input">
-                        <label>Sex: </label>
-                        <select name="sex" value={sex} onChange={e => onChange(e)} required>
+                        <label htmlFor="sex">Sex: </label>
+                        <select id="sex" name="sex" value={sex} onChange={e => onChange(e)} required>
                             <option value="">Select...</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
                     </div>
                     <div className="baby-registration-input">
-                        <label>Birth Weight: </label>
+                        <label htmlFor="birthWeight">Birth Weight: </label>
                         <input 
+                            id="birthWeight"
                             type="text"
                             name="birthWeight"
                             value={birthWeight}
@@ -78,8 +81,9 @@ const BabyRegistration = () => {
                         />
                     </div>
                     <div className="baby-registration-input">
-                        <label>Birth Height: </label>
+                        <label htmlFor="birthHeight">Birth Height: </label>
                         <input 
+                            id="birthHeight"
                             type="text"
                             name="birthHeight"
                             value={birthHeight}

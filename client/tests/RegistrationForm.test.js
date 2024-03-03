@@ -2,14 +2,13 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import RegistrationForm from '../src/components/auth/RegistrationForm'; // Adjust the import path as necessary
+import RegistrationForm from '../src/components/auth/RegistrationForm';
 import axios from 'axios';
 
 jest.mock('axios');
 
 describe('RegistrationForm', () => {
   beforeEach(() => {
-    // Clear all instances and calls to constructor and all methods:
     axios.post.mockClear();
   });
 
@@ -35,7 +34,7 @@ describe('RegistrationForm', () => {
   });
 
   test('submits the form data', async () => {
-    axios.post.mockResolvedValue({data: 'User registered'}); // Mock axios post request
+    axios.post.mockResolvedValue({data: 'User registered'});
 
     render(<RegistrationForm />);
 
@@ -52,5 +51,5 @@ describe('RegistrationForm', () => {
         {"headers": {"Content-Type": "application/json"}}
     );
   });
-  
+
 });

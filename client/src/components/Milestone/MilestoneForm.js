@@ -80,8 +80,8 @@ const MilestoneForm = ({ onSave }) => {
             />
           </div>
           <div className="milestone-input">
-            <label>Type: </label>
-            <select name="type" value={type} onChange={e => onChange(e)} required>
+            <label htmlFor="type">Type: </label>
+            <select id="type" name="type" value={type} onChange={e => onChange(e)} required>
               <option value="">Select...</option>
               <option value="First Steps">First Steps</option>
               <option value="Other">Other</option>

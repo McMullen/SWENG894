@@ -50,7 +50,7 @@ const Dashboard = () => {
                     </li>
                 ))}
                 </ul>
-                <button onClick={handleAddBaby} classname="add-baby-button">Add a new baby</button>
+                <button onClick={handleAddBaby} className="add-baby-button">Add a new baby</button>
             </div>
             <div className="baby-info">
                 {selectedBaby ? (
@@ -60,7 +60,7 @@ const Dashboard = () => {
                     <p>Age: {calculateAge(selectedBaby.birthDate)}</p>
                     <p>Dob: {formatDate(selectedBaby.birthDate)}</p>
                     {/* Display more information about the selected baby */}
-                    <button onClick={handleBabyDashboard} classname="baby-dashboard-button">More Information</button>
+                    <button onClick={handleBabyDashboard} className="baby-dashboard-button">More Information</button>
                 </div>
 
                 ) : (
