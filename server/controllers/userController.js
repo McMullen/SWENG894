@@ -10,11 +10,9 @@ exports.register = async(req, res) => {
         const newUser = new userModel(user);
         await newUser.save();
 
-        res.status(201).json({
-            success: true,
-            message: 'User registered successfully',
-            data: newUser
-        });
+        const loginUser = await userModel.findOne({where: {email}});
+        const token = jwt.sign({ userId: loginUser.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.status(200).json({token});
     }catch(error){
         res.status(500).json({
             success: false,

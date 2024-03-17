@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import './loginStyles.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { setAuthToken } from '../../services/auth';
+import './LoginStyles.css';
 
 const LoginForm = ({ onNavigateToRegister }) => {
     const [email, setEmail] = useState('');

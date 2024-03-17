@@ -5,10 +5,12 @@ import RegistrationForm from '../components/auth/RegistrationForm';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Layout from '../components/Layout';
 import Dashboard from '../components/Dashboard/Dashboard'
-import BabyRegistration from '../components/BabyRegistration';
+import BabyRegistration from '../components/BabyRegistration/BabyRegistration';
 import BabyDashboard from '../components/BabyDashboard/BabyDashboard';
+import MilestoneForm from '../components/Milestone/MilestoneForm';
+import UpdateMilestoneForm from '../components/Milestone/UpdateMilestoneForm';
+import VaccinationForm from '../components/HealthRecord/Vaccine/VaccinationForm';
 
-//function App(){
 const App = () => {
     const NavigateToRegister = () => {
         const navigate = useNavigate();
@@ -24,7 +26,10 @@ const App = () => {
                 <Route element={<Layout />}>
                     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                     <Route path="/add-baby" element={<ProtectedRoute><BabyRegistration /></ProtectedRoute>} />
-                    <Route path="/baby/:babyId" element={<BabyDashboard />} />
+                    <Route path="/baby-dashboard/:babyId" element={<BabyDashboard />} />
+                    <Route path="/new-milestone/:babyId" element={<MilestoneForm />} />
+                    <Route path="/update-milestone/:milestoneId" element={<UpdateMilestoneForm />} />
+                    <Route path="/new-vaccination/:babyId" element={<VaccinationForm />} />
                 </Route>
             </Routes>
         </BrowserRouter>

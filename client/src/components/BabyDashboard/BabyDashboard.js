@@ -7,11 +7,20 @@ import './BabyDashboardStyles.css';
 
 const BabyDashboard = () => {
   const navigate = useNavigate();
+  const [milestones, setMilestones] = useState([]);
   const [babyInfo, setBabyInfo] = useState(null);
   const { babyId } = useParams();
 
   const goToUserDashboard = () => {
     navigate('/dashboard');
+  };
+
+  const goToNewMilestone = () => {
+    navigate(`/new-milestone/${babyId}`);
+  };
+
+  const goToUpdateMilestone = (milestone) => {
+    navigate(`/update-milestone/${milestone.id}`, {state: {babyId}});
   };
 
   useEffect(() => {
@@ -30,6 +39,22 @@ const BabyDashboard = () => {
       };
 
       fetchBabyInfo();
+
+      const fetchMilestones = async () => {
+        try {
+          const config = {
+            headers: {
+                'Authorization': `Bearer ${getAuthToken()}`
+            }
+          };
+          const res = await axios.get(`/api/milestone/get-all/${babyId}`, config);
+          setMilestones(res.data);
+        } catch (error) {
+          console.error('Error fetching milestones', error.response?.data);
+        }
+      };
+  
+      fetchMilestones();
   }, [babyId]);
 
   if (!babyInfo) return <div>Loading...</div>;
@@ -45,13 +70,19 @@ const BabyDashboard = () => {
       <div className="lower-section">
         <div className="milestones">
           <h2>Milestones</h2>
-          {/* List of milestones */}
-          <button className="new-milestone">New Milestone</button>
+          <ul>
+          {milestones.map((milestone) => (
+            <li key={milestone.id} onClick={() => goToUpdateMilestone(milestone)}>
+              {milestone.name} - Date Achieved: {formatDate(milestone.date)} - Description: {milestone.description}
+            </li>
+          ))}
+        </ul>
+          <button onClick={goToNewMilestone} className="new-milestone">New Milestone</button>
         </div>
-        <div className="medications">
-          <h2>Medications</h2>
-          {/* List of medications */}
-          <button className="new-medication">New Medication</button>
+        <div className="health-records">
+          <h2>Health Records</h2>
+          {/* List of health records */}
+          <button className="new-health-record">New Health Record</button>
         </div>
       </div>
       <div className="back-to-dashboard">

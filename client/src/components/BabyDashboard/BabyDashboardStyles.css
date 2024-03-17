@@ -16,18 +16,18 @@
     justify-content: space-between;
   }
   
-  .milestones, .medications {
+  .milestones, .health-records {
     flex-basis: calc(50% - 10px);
     border: 1px solid black;
     padding: 20px;
     margin-right: 10px;
   }
   
-  .medications {
+  .health-records {
     margin-right: 0;
   }
   
-  .new-milestone, .new-medication {
+  .new-milestone, .new-health-record {
     display: block;
     padding: 10px;
     margin-top: 10px;

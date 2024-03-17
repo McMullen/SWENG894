@@ -1,0 +1,52 @@
+.baby-registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+  }
+  
+  .baby-registration-box {
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 8px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+  }
+  
+  .baby-registration-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .baby-registration-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .baby-registration-input,
+  .baby-registration-form select {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .submit-button {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
