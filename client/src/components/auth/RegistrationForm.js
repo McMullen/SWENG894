@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './RegistrationStyles.css';
+import { setAuthToken } from '../../services/auth';
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
@@ -15,6 +17,8 @@ const RegistrationForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const navigate = useNavigate();
+
     const onSubmit = async e => {
         e.preventDefault();
         try{
@@ -25,7 +29,8 @@ const RegistrationForm = () => {
             };
             const body = JSON.stringify({user: formData});
             const res = await axios.post('/api/users/register', body, config);
-            console.log(res.data);
+            setAuthToken(res.data.token);
+            navigate('/dashboard');
         }catch(err){
             console.error(err.response.data);
         }

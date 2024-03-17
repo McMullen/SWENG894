@@ -1,5 +1,5 @@
 const {Model, DataTypes} = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../../config/database');
 
 class HealthEvent extends Model{
     static associate(models){
@@ -11,14 +11,6 @@ class HealthEvent extends Model{
 }
 
 HealthEvent.init({
-    healthRecordId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'HealthRecords',
-            key: 'id',
-        },
-    },
     eventType: {
         type: DataTypes.STRING,
         allowNull: false,

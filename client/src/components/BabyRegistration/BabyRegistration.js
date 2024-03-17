@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { getAuthToken } from '../../services/auth';
 import './BabyRegistrationStyles.css';
@@ -18,6 +19,8 @@ const BabyRegistration = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const navigate = useNavigate();
+
     const onSubmit = async e => {
         e.preventDefault();
         try{
@@ -30,6 +33,7 @@ const BabyRegistration = () => {
             const body = JSON.stringify({baby: formData});
             const res = await axios.post('/api/baby/add', body, config);
             console.log(res.data);
+            navigate('/dashboard');
         }catch(err){
             console.error(err.response.data);
         }

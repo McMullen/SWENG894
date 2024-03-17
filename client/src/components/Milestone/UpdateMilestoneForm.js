@@ -98,7 +98,7 @@ const UpdateMilestoneForm = () => {
             </div>
             <div className="milestone-input">
                 <label htmlFor="type">Type: </label>
-                <select id="type" name="type" value={type} onChange={e => onChange(e)} required>
+                <select id="type" name="type" value={milestone.type} onChange={e => onChange(e)} required>
                 <option value="">Select...</option>
                 <option value="First Steps">First Steps</option>
                 <option value="Other">Other</option>
