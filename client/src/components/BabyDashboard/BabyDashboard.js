@@ -23,6 +23,10 @@ const BabyDashboard = () => {
     navigate(`/update-milestone/${milestone.id}`, {state: {babyId}});
   };
 
+  const goToNewVaccine = () => {
+    navigate(`new-vaccination/${babyId}`)
+  };
+
   useEffect(() => {
       const fetchBabyInfo = async () => {
           try {
