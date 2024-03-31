@@ -22,9 +22,18 @@ Medication.init({
   endDate: {
     type: DataTypes.DATE,
     allowNull: false,
+  },
+  healthRecordId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'HealthRecords',
+      key: 'id'
+    }
   }
 },{
   sequelize,
   modelName: 'Medication',
   tableName: 'Medications',
 });
+
+module.exports = Medication;

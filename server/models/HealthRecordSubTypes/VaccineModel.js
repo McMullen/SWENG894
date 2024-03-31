@@ -15,9 +15,18 @@ Vaccine.init({
   nextDueDate: {
     type: DataTypes.DATE,
     allowNull: true,
+  },
+  healthRecordId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'HealthRecords',
+      key: 'id'
+    }
   }
 },{
   sequelize,
   modelName: 'Vaccine',
   tableName: 'Vaccines',
 });
+
+module.exports = Vaccine;

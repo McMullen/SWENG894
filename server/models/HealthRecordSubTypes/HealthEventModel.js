@@ -4,7 +4,7 @@ const sequelize = require('../../config/database');
 class HealthEvent extends Model{
     static associate(models){
         HealthEvent.belongsTo(models.HealthRecord, {
-            foreignKey: 'HealthRecordID',
+            foreignKey: 'HealthRecordId',
             as: 'healthRecord'
         });
     }

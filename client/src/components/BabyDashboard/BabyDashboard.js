@@ -8,6 +8,7 @@ import './BabyDashboardStyles.css';
 const BabyDashboard = () => {
   const navigate = useNavigate();
   const [milestones, setMilestones] = useState([]);
+  const [healthRecords, setHealthRecords] = useState([]);
   const [babyInfo, setBabyInfo] = useState(null);
   const { babyId } = useParams();
 
@@ -59,6 +60,23 @@ const BabyDashboard = () => {
       };
   
       fetchMilestones();
+
+      const fetchHealthRecords = async () => {
+        try{
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${getAuthToken()}`
+            }
+          };
+          const res = await axios.get(`/api/health/get-all-vaccinations/${babyId}`, config);
+          setMilestones(res.data);
+        }catch (error) {
+          console.error('Error fetching health records', error.response?.data);
+        }
+      };
+
+      fetchHealthRecords();
+
   }, [babyId]);
 
   if (!babyInfo) return <div>Loading...</div>;
@@ -85,7 +103,13 @@ const BabyDashboard = () => {
         </div>
         <div className="health-records">
           <h2>Health Records</h2>
-          {/* List of health records */}
+          <ul>
+          {healthRecords.map((healthRecord) => (
+            <li>
+              Record Type: {healthRecord.recordType} - Vaccine Name: {healthRecord.vaccineName} - Date Given: {formatDate(healthRecord.dateGiven)} - Description: {healthRecord.description}
+            </li>
+          ))}
+        </ul>
           <button onClick={goToNewVaccine} className="new-health-record">New Health Record</button>
         </div>
       </div>

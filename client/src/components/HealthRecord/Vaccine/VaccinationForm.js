@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getAuthToken } from '../../../services/auth';
 import './VaccinationStyles.css';
 
-const VaccinationForm = ({ babyId }) => {
+const VaccinationForm = ({ onSave }) => {
   const [formData, setFormData] = useState({
     vaccineName: '',
     dateGiven: '',
@@ -11,6 +12,8 @@ const VaccinationForm = ({ babyId }) => {
     notes: ''
   });
 
+  const navigate = useNavigate();
+  const { babyId } = useParams();
   const { vaccineName, dateGiven, nextDueDate, notes } = formData;
 
   const onChange = (e) => {
@@ -29,8 +32,9 @@ const VaccinationForm = ({ babyId }) => {
       };
 
       const body = JSON.stringify({vaccine: formData});
-      await axios.post(`/api/health/add-vaccination/${babyId}`, body, config);
-      alert('Vaccination record added successfully!');
+      const res = await axios.post(`/api/health/add-vaccination/${babyId}`, body, config);
+      console.log(res.data);
+      navigate(`/baby-dashboard/${babyId}`);
     } catch (error) {
       console.error('Error adding vaccination record:', error.response.data);
     }

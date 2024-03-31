@@ -17,3 +17,5 @@ DoctorVisit.init({
   modelName: 'DoctorVisit',
   tableName: 'DoctorVisits',
 });
+
+module.exports = DoctorVisit;
