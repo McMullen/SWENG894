@@ -24,7 +24,7 @@ const BabyDashboard = () => {
   };
 
   const goToNewVaccine = () => {
-    navigate(`new-vaccination/${babyId}`)
+    navigate(`/new-vaccination/${babyId}`)
   };
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const BabyDashboard = () => {
         <div className="health-records">
           <h2>Health Records</h2>
           {/* List of health records */}
-          <button className="new-health-record">New Health Record</button>
+          <button onClick={goToNewVaccine} className="new-health-record">New Health Record</button>
         </div>
       </div>
       <div className="back-to-dashboard">

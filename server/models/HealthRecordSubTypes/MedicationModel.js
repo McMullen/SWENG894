@@ -1,3 +1,6 @@
+const {Model, DataTypes} = require('sequelize');
+const sequelize = require('../../config/database');
+
 class Medication extends Model {}
 Medication.init({
   medicationName: {
