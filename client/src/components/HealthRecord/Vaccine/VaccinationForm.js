@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { getAuthToken } from '../../../services/auth';
+import './VaccinationStyles.css';
 
-const VaccinationForm = ({ babyId }) => {
+const VaccinationForm = ({ onSave }) => {
   const [formData, setFormData] = useState({
     vaccineName: '',
     dateGiven: '',
@@ -10,6 +12,8 @@ const VaccinationForm = ({ babyId }) => {
     notes: ''
   });
 
+  const navigate = useNavigate();
+  const { babyId } = useParams();
   const { vaccineName, dateGiven, nextDueDate, notes } = formData;
 
   const onChange = (e) => {
@@ -27,41 +31,65 @@ const VaccinationForm = ({ babyId }) => {
         }
       };
 
-      await axios.post('/api/vaccinations', { ...formData, babyId }, config);
-      alert('Vaccination record added successfully!');
-      setFormData({
-        vaccineName: '',
-        dateGiven: '',
-        nextDueDate: '',
-        notes: ''
-      });
-
+      const body = JSON.stringify({vaccine: formData});
+      const res = await axios.post(`/api/health/add-vaccination/${babyId}`, body, config);
+      console.log(res.data);
+      navigate(`/baby-dashboard/${babyId}`);
     } catch (error) {
       console.error('Error adding vaccination record:', error.response.data);
     }
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <h2>Add Vaccination Record</h2>
-      <div>
-        <label htmlFor="vaccineName">Vaccine Name:</label>
-        <input type="text" id="vaccineName" name="vaccineName" value={vaccineName} onChange={onChange} required />
+    <div className="vaccine-form-container">
+      <div className="vaccine-box">
+        <h1 className="vaccine-title">New Vaccination</h1>
+        <form onSubmit={onSubmit} className='vaccineForm'>
+          <div className='vaccine-input'>
+            <label>Vaccine Name: </label>
+            <input 
+              type="text"
+              id="vaccineName"
+              name="vaccineName"
+              value={vaccineName}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className='vaccine-input'>
+            <label>Date Given: </label>
+            <input 
+              type="date"
+              id="dateGiven"
+              name="dateGiven"
+              value={dateGiven}
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className='vaccine-input'>
+            <label>Next Due Date: </label>
+            <input 
+              type="date"
+              id="nextDueDate"
+              name="nextDueDate"
+              value={nextDueDate}
+              onChange={onChange}
+            />
+          </div>
+          <div className='vaccine-input'>
+            <label>Notes: </label>
+            <textarea
+              id="notes"
+              name="notes"
+              value={notes}
+              onChange={onChange}
+            />
+          </div>
+          <button type="submit" className='add-button'>Add Record</button>
+        </form>
       </div>
-      <div>
-        <label htmlFor="dateGiven">Date Given:</label>
-        <input type="date" id="dateGiven" name="dateGiven" value={dateGiven} onChange={onChange} required />
-      </div>
-      <div>
-        <label htmlFor="nextDueDate">Next Due Date:</label>
-        <input type="date" id="nextDueDate" name="nextDueDate" value={nextDueDate} onChange={onChange} />
-      </div>
-      <div>
-        <label htmlFor="notes">Notes:</label>
-        <textarea id="notes" name="notes" value={notes} onChange={onChange} />
-      </div>
-      <button type="submit">Add Record</button>
-    </form>
+    </div>
   );
 };
 

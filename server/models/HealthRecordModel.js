@@ -4,13 +4,19 @@ const sequelize = require('../config/database');
 class HealthRecord extends Model{
     static associate(models){
         HealthRecord.belongsTo(models.Baby, {
-            foreignKey: 'babyID',
+            foreignKey: 'babyId',
             as: 'baby'
         });
     }
 }
 
 HealthRecord.init({
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
     babyId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -23,10 +29,6 @@ HealthRecord.init({
         type: DataTypes.STRING,
         allowNull: false,
       },
-    recordId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     date: {
         type: DataTypes.DATE,
         allowNull: false,
