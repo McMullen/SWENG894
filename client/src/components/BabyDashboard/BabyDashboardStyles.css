@@ -11,12 +11,12 @@
     margin-bottom: 20px;
   }
   
-  .lower-section {
+  .middle-section, .lower-section {
     display: flex;
     justify-content: space-between;
   }
   
-  .milestones, .health-records {
+  .milestones, .health-records, .growth-records {
     flex-basis: calc(50% - 10px);
     border: 1px solid black;
     padding: 20px;
@@ -27,7 +27,7 @@
     margin-right: 0;
   }
   
-  .new-milestone, .new-health-record {
+  .new-milestone, .new-health-record, .new-growth-record {
     display: block;
     padding: 10px;
     margin-top: 10px;

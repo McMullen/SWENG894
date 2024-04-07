@@ -1,4 +1,5 @@
 const GrowthModel = require('../models/GrowthModel');
+const BabyModel = require('../models/BabyModel');
 const authService = require('../services/authService');
 
 exports.newGrowth = async(req, res) => {

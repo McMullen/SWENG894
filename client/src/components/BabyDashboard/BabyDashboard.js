@@ -28,6 +28,10 @@ const BabyDashboard = () => {
     navigate(`/new-vaccination/${babyId}`)
   };
 
+  const goToNewGrowth = () => {
+    navigate(`/new-growth/${babyId}`)
+  }
+
   useEffect(() => {
       const fetchBabyInfo = async () => {
           try {
@@ -89,7 +93,7 @@ const BabyDashboard = () => {
         <div><strong>DoB:</strong> {formatDate(babyInfo.birthDate)}</div>
         <div><strong>Current Weight:</strong> {babyInfo.birthWeight}</div>
       </div>
-      <div className="lower-section">
+      <div className="middle-section">
         <div className="milestones">
           <h2>Milestones</h2>
           <ul>
@@ -111,6 +115,17 @@ const BabyDashboard = () => {
           ))}
         </ul>
           <button onClick={goToNewVaccine} className="new-health-record">New Health Record</button>
+        </div>
+      </div>
+      <div className="lower-section">
+        <div className="growth-records">
+          <div className="gowths">
+            <h2>Growth Records</h2>
+            <ul>
+
+            </ul>
+            <button onClick={goToNewGrowth} className="new-growth-record">New Growth</button>
+          </div>
         </div>
       </div>
       <div className="back-to-dashboard">
