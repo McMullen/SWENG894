@@ -46,8 +46,8 @@ const VaccinationForm = ({ onSave }) => {
         <h1 className="vaccine-title">New Vaccination</h1>
         <form onSubmit={onSubmit} className='vaccineForm'>
           <div className='vaccine-input'>
-            <label>Vaccine Name: </label>
-            <input 
+            <label htmlFor="vaccineName">Vaccine Name: </label>
+            <input
               type="text"
               id="vaccineName"
               name="vaccineName"
@@ -57,7 +57,7 @@ const VaccinationForm = ({ onSave }) => {
             />
           </div>
           <div className='vaccine-input'>
-            <label>Date Given: </label>
+            <label htmlFor="dateGiven">Date Given: </label>
             <input 
               type="date"
               id="dateGiven"
@@ -68,7 +68,7 @@ const VaccinationForm = ({ onSave }) => {
             />
           </div>
           <div className='vaccine-input'>
-            <label>Next Due Date: </label>
+            <label htmlFor="nextDueDate">Next Due Date: </label>
             <input 
               type="date"
               id="nextDueDate"
@@ -78,7 +78,7 @@ const VaccinationForm = ({ onSave }) => {
             />
           </div>
           <div className='vaccine-input'>
-            <label>Notes: </label>
+            <label htmlFor="notes">Notes: </label>
             <textarea
               id="notes"
               name="notes"

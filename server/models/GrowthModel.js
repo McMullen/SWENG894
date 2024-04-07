@@ -19,13 +19,6 @@ Growth.init({
             key: 'id',
         },
     },
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-        },
-    },
     date: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -40,12 +33,19 @@ Growth.init({
             notEmpty: true,
         }
     },
-    type: {
-        type: DataTypes.STRING,
+    height: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
             notEmpty: true,
-        },
+        }
+    },
+    weight: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
     },
     description: {
         type: DataTypes.STRING,
@@ -54,7 +54,7 @@ Growth.init({
 },{
         sequelize,
         modelName: 'Growth',
-        tableName: 'GrowthRecords',
+        tableName: 'Growths',
 });
 
 module.exports = Growth;

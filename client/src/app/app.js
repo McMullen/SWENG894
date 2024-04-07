@@ -10,6 +10,7 @@ import BabyDashboard from '../components/BabyDashboard/BabyDashboard';
 import MilestoneForm from '../components/Milestone/MilestoneForm';
 import UpdateMilestoneForm from '../components/Milestone/UpdateMilestoneForm';
 import VaccinationForm from '../components/HealthRecord/Vaccine/VaccinationForm';
+import GrowthForm from '../components/HealthRecord/Growth Record/GrowthForm';
 
 const App = () => {
     const NavigateToRegister = () => {
@@ -30,6 +31,7 @@ const App = () => {
                     <Route path="/new-milestone/:babyId" element={<MilestoneForm />} />
                     <Route path="/update-milestone/:milestoneId" element={<UpdateMilestoneForm />} />
                     <Route path="/new-vaccination/:babyId" element={<VaccinationForm />} />
+                    <Route path="/new-growth/:babyId" element={<GrowthForm />} />
                 </Route>
             </Routes>
         </BrowserRouter>

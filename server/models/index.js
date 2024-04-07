@@ -8,6 +8,7 @@ const Medication = require('./HealthRecordSubTypes/MedicationModel');
 const Vaccine = require('./HealthRecordSubTypes/VaccineModel');
 const DoctorVisit = require('./HealthRecordSubTypes/DoctorVisitModel');
 const HealthEvent = require('./HealthRecordSubTypes/HealthEventModel');
+const Growth = require('./GrowthModel');
 
 const models = {
     Baby: Baby,
@@ -18,6 +19,7 @@ const models = {
     Vaccine: Vaccine,
     DoctorVisit: DoctorVisit,
     HealthEvent: HealthEvent,
+    Growth: Growth,
 };
 
 setupAssociations();
