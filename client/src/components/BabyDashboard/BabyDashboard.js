@@ -5,10 +5,11 @@ import { getAuthToken } from '../../services/auth';
 import { formatDate, calculateAge } from '../../utils/dateUtils';
 import './BabyDashboardStyles.css';
 
-const BabyDashboard = () => {
+  const BabyDashboard = () => {
   const navigate = useNavigate();
   const [milestones, setMilestones] = useState([]);
   const [healthRecords, setHealthRecords] = useState([]);
+  const [growthRecords, setGrowthRecords] = useState([]);
   const [babyInfo, setBabyInfo] = useState(null);
   const { babyId } = useParams();
 
@@ -73,13 +74,29 @@ const BabyDashboard = () => {
             }
           };
           const res = await axios.get(`/api/health/get-all-vaccinations/${babyId}`, config);
-          setMilestones(res.data);
+          setHealthRecords(res.data);
         }catch (error) {
           console.error('Error fetching health records', error.response?.data);
         }
       };
 
       fetchHealthRecords();
+
+      const fetchGrowthRecords = async () => {
+        try{
+          const config = {
+            headers: {
+              'Authorization': `Bearer ${getAuthToken()}`
+            }
+          };
+          const res = await axios.get(`/api/growth/get-all/${babyId}`, config);
+          setGrowthRecords(res.data);
+        }catch(error){
+          console.error('Error fetching growth records', error.response?.data);
+        }
+      };
+
+      fetchGrowthRecords();
 
   }, [babyId]);
 
@@ -107,22 +124,20 @@ const BabyDashboard = () => {
         </div>
         <div className="health-records">
           <h2>Health Records</h2>
-          <ul>
-          {healthRecords.map((healthRecord) => (
-            <li>
-              Record Type: {healthRecord.recordType} - Vaccine Name: {healthRecord.vaccineName} - Date Given: {formatDate(healthRecord.dateGiven)} - Description: {healthRecord.description}
-            </li>
-          ))}
-        </ul>
+          
           <button onClick={goToNewVaccine} className="new-health-record">New Health Record</button>
         </div>
       </div>
       <div className="lower-section">
         <div className="growth-records">
-          <div className="gowths">
+          <div className="growths">
             <h2>Growth Records</h2>
             <ul>
-
+            {growthRecords.map((growthRecord) => (
+              <li>
+                Age: {growthRecord.age} - Height: {growthRecord.height} - Weight: {growthRecord.weight}
+              </li>
+            ))}
             </ul>
             <button onClick={goToNewGrowth} className="new-growth-record">New Growth</button>
           </div>
