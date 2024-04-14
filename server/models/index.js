@@ -1,5 +1,5 @@
 const sequelize = require('../config/database');
-const setupAssociations = require('../HealthRecordSubTypes/associations');
+const setupAssociations = require('./HealthRecordSubTypes/associations');
 const Baby = require('./BabyModel');
 const User = require('./UserModel');
 const Milestone = require('./MilestoneModel');
@@ -23,6 +23,7 @@ const models = {
 };
 
 setupAssociations();
+
 /** 
 Object.keys(models).forEach((key) => {
     if('associate' in models[key]) {

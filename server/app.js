@@ -1,5 +1,6 @@
 const express = require('express');
 const sequelize = require('./config/database');
+const db = require('./models');
 const resolve = require('path').resolve;
 const port = 3000;
 const app = express();

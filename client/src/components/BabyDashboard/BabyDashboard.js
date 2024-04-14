@@ -74,7 +74,8 @@ import './BabyDashboardStyles.css';
             }
           };
           const res = await axios.get(`/api/health/get-all-vaccinations/${babyId}`, config);
-          setHealthRecords(res.data);
+          console.log(res.data.data);
+          setHealthRecords(res.data.data);
         }catch (error) {
           console.error('Error fetching health records', error.response?.data);
         }
@@ -119,12 +120,30 @@ import './BabyDashboardStyles.css';
               {milestone.name} - Date Achieved: {formatDate(milestone.date)} - Description: {milestone.description}
             </li>
           ))}
-        </ul>
+          </ul>
           <button onClick={goToNewMilestone} className="new-milestone">New Milestone</button>
         </div>
         <div className="health-records">
           <h2>Health Records</h2>
-          
+          <ul>
+          {healthRecords.map(record => (
+            <div key={record.id}>
+                <h3>Health Record: {record.date} - {record.description}</h3>
+                {/* Check if vaccines are available before mapping */}
+                {record.vaccines && Array.isArray(record.vaccines) ? (
+                    <ul>
+                        {record.vaccines.map(vaccine => (
+                            <li key={vaccine.id}>
+                                Vaccine: {vaccine.vaccineName}, Given: {vaccine.dateGiven}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No vaccines available for this record.</p>
+                )}
+            </div>
+        ))}
+          </ul>
           <button onClick={goToNewVaccine} className="new-health-record">New Health Record</button>
         </div>
       </div>

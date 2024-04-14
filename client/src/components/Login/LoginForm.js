@@ -21,7 +21,6 @@ const LoginForm = ({ onNavigateToRegister }) => {
             const res = await axios.post('api/users/login', body, config);
             setAuthToken(res.data.token);
             navigate('/dashboard');
-            console.log('Login successful: ', res.data);
         }catch(err){
             console.error('Login failed: ', err.response.data);
         }
