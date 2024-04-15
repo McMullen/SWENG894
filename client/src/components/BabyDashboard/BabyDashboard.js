@@ -26,12 +26,16 @@ import './BabyDashboardStyles.css';
   };
 
   const goToNewVaccine = () => {
-    navigate(`/new-vaccination/${babyId}`)
+    navigate(`/new-vaccination/${babyId}`);
   };
 
   const goToNewGrowth = () => {
-    navigate(`/new-growth/${babyId}`)
+    navigate(`/new-growth/${babyId}`);
   }
+
+  const goToGrowthPredictor = () => {
+    navigate(`/predict-growth/${babyId}`);
+  };
 
   useEffect(() => {
       const fetchBabyInfo = async () => {
@@ -128,13 +132,13 @@ import './BabyDashboardStyles.css';
           <ul>
           {healthRecords.map(record => (
             <div key={record.id}>
-                <h3>Health Record: {record.date} - {record.description}</h3>
+                <h3>Health Record: {record.recordType} - {record.description}</h3>
                 {/* Check if vaccines are available before mapping */}
                 {record.vaccines && Array.isArray(record.vaccines) ? (
                     <ul>
                         {record.vaccines.map(vaccine => (
                             <li key={vaccine.id}>
-                                Vaccine: {vaccine.vaccineName}, Given: {vaccine.dateGiven}
+                                Vaccine: {vaccine.vaccineName}, Date Given: {formatDate(vaccine.dateGiven)}
                             </li>
                         ))}
                     </ul>
@@ -158,8 +162,14 @@ import './BabyDashboardStyles.css';
               </li>
             ))}
             </ul>
-            <button onClick={goToNewGrowth} className="new-growth-record">New Growth</button>
+            <div className="button-container">
+              <button onClick={goToNewGrowth} className="new-growth-record">New Growth</button>
+              <button onClick={goToGrowthPredictor} className="growth-predictor-button">Growth Predictor</button>
+            </div>
           </div>
+        </div>
+        <div className="placeholder">
+
         </div>
       </div>
       <div className="back-to-dashboard">

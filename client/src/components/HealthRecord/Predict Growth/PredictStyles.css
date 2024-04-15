@@ -1,0 +1,12 @@
+  .back-to-baby-dashboard {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding: 10px 0;
+  }
+  
+  .baby-dashboard-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 10px;
+  }
