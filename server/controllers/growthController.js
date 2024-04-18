@@ -89,19 +89,24 @@ exports.getCDCData = async(req, res) => {
         const futureCdcData = cdcData.find(entry => entry.Age === futureAge);
 
         // Constructing the feature vector
-        const percentiles = [
+        const currentPercentiles = [
             currentCdcData['3rd'], currentCdcData['5th'], currentCdcData['10th'],
             currentCdcData['25th'], currentCdcData['50th'], currentCdcData['75th'],
             currentCdcData['90th'], currentCdcData['95th'], currentCdcData['97th']
         ];
-        const features = [currentAge, currentHeight, ...percentiles];
+        const futurePercentiles = [
+            futureCdcData['3rd'], futureCdcData['5th'], futureCdcData['10th'],
+            futureCdcData['25th'], futureCdcData['50th'], futureCdcData['75th'],
+            futureCdcData['90th'], futureCdcData['95th'], futureCdcData['97th']
+        ];
+        const features = [currentAge, currentHeight, ...currentPercentiles, futureAge, ...futurePercentiles];
 
         // Labels array
         const labels = [futureHeight];
 
         // Create the model
         const model = tf.sequential();
-        model.add(tf.layers.dense({ inputShape: [11], units: 10, activation: 'relu' }));
+        model.add(tf.layers.dense({ inputShape: [21], units: 10, activation: 'relu' }));
         model.add(tf.layers.dense({ units: 1 }));
         model.compile({
             optimizer: 'adam',
@@ -119,7 +124,7 @@ exports.getCDCData = async(req, res) => {
             validationSplit: 0.2
         });
 
-        const newFeatureArray = [25.5, 81, ...percentiles];
+        const newFeatureArray = [25.5, 81, ...currentPercentiles, futureAge, ...futurePercentiles];
         const newFeatures = tf.tensor2d([newFeatureArray]);
         const predictedHeight = model.predict(newFeatures);
         predictedHeight.data().then(data => {
@@ -131,99 +136,3 @@ exports.getCDCData = async(req, res) => {
         return [];
     }
 };
-
-function standardizeData(data, cdcData) {
-    // Extract features for current data
-    const currentFeatures = data.map(d => {
-        const entry = cdcData.find(e => e.Age === d.currentAge);
-        return entry ? [d.currentAge, d.currentHeight, entry['3rd'], entry['5th'], entry['10th'], entry['25th'], entry['50th'], entry['75th'], entry['90th'], entry['95th'], entry['97th']] : [d.currentAge, d.currentHeight].concat(new Array(9).fill(0));
-    });
-
-    // Extract features for future data
-    const futureFeatures = data.map(d => {
-        const entry = cdcData.find(e => e.Age === d.futureAge);
-        return entry ? [d.futureAge, entry['3rd'], entry['5th'], entry['10th'], entry['25th'], entry['50th'], entry['75th'], entry['90th'], entry['95th'], entry['97th']] : [d.futureAge].concat(new Array(9).fill(0));
-    });
-
-    // Convert arrays to tensors
-    const currentInputs = tf.tensor2d(currentFeatures, [data.length, 11]); // Shape [number of data points, features per data point]
-    const futureInputs = tf.tensor2d(futureFeatures, [data.length, 10]); // Future inputs do not include 'currentHeight'
-
-    // Standardize current inputs
-    const currentMean = currentInputs.mean(0);
-    const currentStd = computeStandardDeviation(currentInputs);
-    const normalizedCurrentInputs = currentInputs.sub(currentMean).div(currentStd);
-
-    console.log("Mean",currentMean.dataSync());
-    console.log("Current STD",currentStd.dataSync());
-    console.log("Current normalized",normalizedCurrentInputs.dataSync());
-    // Standardize future inputs
-    const futureMean = futureInputs.mean(0);
-    const futureStd = computeStandardDeviation(futureInputs);
-    const normalizedFutureInputs = futureInputs.sub(futureMean).div(futureStd);
-
-    console.log(futureMean.dataSync());
-    console.log(futureStd.dataSync());
-    console.log(normalizedFutureInputs.dataSync());
-    // Concatenate normalized current and future inputs along the feature axis
-    const combinedInputs = tf.concat([normalizedCurrentInputs, normalizedFutureInputs], 1);
-
-    console.log(combinedInputs.dataSync());
-    return {
-        inputs: combinedInputs,
-        currentNormalizationConstants: { mean: currentMean, std: currentStd },
-        futureNormalizationConstants: { mean: futureMean, std: futureStd }
-    };
-}
-
-function computeStandardDeviation(tensor) {
-    const mean = tensor.mean(0);
-    console.log("tensor",tensor.dataSync());
-    console.log("mean",mean.dataSync());
-    const squaredDifference = tensor.sub(mean).square();
-    const epsilon = 1e-8;  // Small number to ensure no division by zero
-    const variance = squaredDifference.mean(0).add(epsilon);  // Adding epsilon to the variance
-    return variance.sqrt();
-}
-
-
-function createModel() {
-    const model = tf.sequential();
-    model.add(tf.layers.dense({
-        inputShape: [21], 
-        units: 10,
-        activation: 'relu'
-    }));
-
-    model.compile({
-        optimizer: 'adam',
-        loss: 'meanSquaredError',
-        metrics: ['mse']
-    });
-    return model;
-}
-
-async function trainModel(model, inputs, labels) {
-    const history = await model.fit(inputs, labels, {
-      epochs: 100,
-      batchSize: 32,
-      validationSplit: 0.2
-    });
-  
-    return model;
-}
-
-function predictHeight(model, currentAge, currentHeight, futureAge, percentiles, normalizationConstants) {
-    // Update this function if necessary to use the new normalization constants correctly
-    const { mean, std } = normalizationConstants;
-    const ageDiff = futureAge - currentAge;
-    const inputsArray = [currentAge, currentHeight, ageDiff, ...percentiles];
-    const inputsTensor = tf.tensor2d([inputsArray]);
-    const normalizedInputs = inputsTensor.sub(mean).div(std); // Ensure you're using standardization correctly here
-    
-    const normalizedHeight = model.predict(normalizedInputs);
-    const predictedHeight = normalizedHeight.dataSync()[0]; // Updated to correctly handle tensor outputs
-    
-    return predictedHeight;
-}
-  
