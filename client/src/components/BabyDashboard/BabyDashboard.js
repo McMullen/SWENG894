@@ -78,7 +78,6 @@ import './BabyDashboardStyles.css';
             }
           };
           const res = await axios.get(`/api/health/get-all-vaccinations/${babyId}`, config);
-          console.log(res.data.data);
           setHealthRecords(res.data.data);
         }catch (error) {
           console.error('Error fetching health records', error.response?.data);
@@ -132,7 +131,7 @@ import './BabyDashboardStyles.css';
           <ul>
           {healthRecords.map(record => (
             <div key={record.id}>
-                <h3>Health Record: {record.recordType} - {record.description}</h3>
+                <h3>Health Record: {record.recordType}</h3>
                 {/* Check if vaccines are available before mapping */}
                 {record.vaccines && Array.isArray(record.vaccines) ? (
                     <ul>

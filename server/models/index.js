@@ -9,6 +9,7 @@ const Vaccine = require('./HealthRecordSubTypes/VaccineModel');
 const DoctorVisit = require('./HealthRecordSubTypes/DoctorVisitModel');
 const HealthEvent = require('./HealthRecordSubTypes/HealthEventModel');
 const Growth = require('./GrowthModel');
+const CDC = require('./CDCModel');
 
 const models = {
     Baby: Baby,
@@ -20,15 +21,9 @@ const models = {
     DoctorVisit: DoctorVisit,
     HealthEvent: HealthEvent,
     Growth: Growth,
+    CDC: CDC,
 };
 
 setupAssociations();
 
-/** 
-Object.keys(models).forEach((key) => {
-    if('associate' in models[key]) {
-        models[key].associate(models);
-    }
-});
-*/
 module.exports = models;

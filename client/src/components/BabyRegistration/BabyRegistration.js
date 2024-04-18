@@ -32,7 +32,6 @@ const BabyRegistration = () => {
             };
             const body = JSON.stringify({baby: formData});
             const res = await axios.post('/api/baby/add', body, config);
-            console.log(res.data);
             navigate('/dashboard');
         }catch(err){
             console.error(err.response.data);
