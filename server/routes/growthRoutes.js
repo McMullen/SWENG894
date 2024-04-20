@@ -10,4 +10,6 @@ router.put('/update/:growthId', authMiddleware, growthController.updateGrowth);
 router.get('/get/:growthId', authMiddleware, growthController.getGrowth);
 router.get('/get-all/:babyId', authMiddleware, growthController.getAllGrowths);
 
+router.get('/get-predicted-height/:babyId', authMiddleware, growthController.getPredcitedHeight);
+
 module.exports = router;

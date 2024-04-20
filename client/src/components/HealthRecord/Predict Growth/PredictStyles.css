@@ -1,0 +1,35 @@
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+  }
+  .grid-item {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid black;
+  }
+  .submit-button {
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .back-to-baby-dashboard {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding: 10px 0;
+  }
+  
+  .baby-dashboard-button {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 10px;
+  }

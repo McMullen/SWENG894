@@ -11,6 +11,7 @@ import MilestoneForm from '../components/Milestone/MilestoneForm';
 import UpdateMilestoneForm from '../components/Milestone/UpdateMilestoneForm';
 import VaccinationForm from '../components/HealthRecord/Vaccine/VaccinationForm';
 import GrowthForm from '../components/HealthRecord/Growth Record/GrowthForm';
+import PredictPage from '../components/HealthRecord/Predict Growth/Predict';
 
 const App = () => {
     const NavigateToRegister = () => {
@@ -32,6 +33,7 @@ const App = () => {
                     <Route path="/update-milestone/:milestoneId" element={<UpdateMilestoneForm />} />
                     <Route path="/new-vaccination/:babyId" element={<VaccinationForm />} />
                     <Route path="/new-growth/:babyId" element={<GrowthForm />} />
+                    <Route path="/predict-growth/:babyId" element={<PredictPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -1,5 +1,5 @@
 const sequelize = require('../config/database');
-const setupAssociations = require('../HealthRecordSubTypes/associations');
+const setupAssociations = require('./HealthRecordSubTypes/associations');
 const Baby = require('./BabyModel');
 const User = require('./UserModel');
 const Milestone = require('./MilestoneModel');
@@ -9,6 +9,8 @@ const Vaccine = require('./HealthRecordSubTypes/VaccineModel');
 const DoctorVisit = require('./HealthRecordSubTypes/DoctorVisitModel');
 const HealthEvent = require('./HealthRecordSubTypes/HealthEventModel');
 const Growth = require('./GrowthModel');
+const CDC = require('./CDCModel');
+const TrainingModel = require('./TrainingModel');
 
 const models = {
     Baby: Baby,
@@ -20,14 +22,10 @@ const models = {
     DoctorVisit: DoctorVisit,
     HealthEvent: HealthEvent,
     Growth: Growth,
+    CDC: CDC,
+    TrainingModel: TrainingModel,
 };
 
 setupAssociations();
-/** 
-Object.keys(models).forEach((key) => {
-    if('associate' in models[key]) {
-        models[key].associate(models);
-    }
-});
-*/
+
 module.exports = models;

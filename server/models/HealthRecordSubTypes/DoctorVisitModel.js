@@ -1,3 +1,6 @@
+const {Model, DataTypes} = require('sequelize');
+const sequelize = require('../../config/database');
+
 class DoctorVisit extends Model {}
 DoctorVisit.init({
     doctorSeen: {
