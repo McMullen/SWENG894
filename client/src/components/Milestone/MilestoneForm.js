@@ -83,7 +83,11 @@ const MilestoneForm = ({ onSave }) => {
             <label htmlFor="type">Type: </label>
             <select id="type" name="type" value={type} onChange={e => onChange(e)} required>
               <option value="">Select...</option>
+              <option value="First Smile">First Smile</option>
+              <option value="First Coo">First Coo</option>
+              <option value="Respond to Name">Respond to Name</option>
               <option value="First Steps">First Steps</option>
+              <option value="First Words">First Words</option>
               <option value="Other">Other</option>
             </select>
           </div>

@@ -34,7 +34,6 @@ const GrowthForm = ({ onSave }) => {
 
       const body = JSON.stringify({growth: formData});
       const res = await axios.post(`/api/growth/new/${babyId}`, body, config);
-      console.log(res.data);
       navigate(`/baby-dashboard/${babyId}`);
     } catch (error) {
       console.error('Error adding growth record:', error.response.data);

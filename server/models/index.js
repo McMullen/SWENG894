@@ -10,6 +10,7 @@ const DoctorVisit = require('./HealthRecordSubTypes/DoctorVisitModel');
 const HealthEvent = require('./HealthRecordSubTypes/HealthEventModel');
 const Growth = require('./GrowthModel');
 const CDC = require('./CDCModel');
+const TrainingModel = require('./TrainingModel');
 
 const models = {
     Baby: Baby,
@@ -22,6 +23,7 @@ const models = {
     HealthEvent: HealthEvent,
     Growth: Growth,
     CDC: CDC,
+    TrainingModel: TrainingModel,
 };
 
 setupAssociations();

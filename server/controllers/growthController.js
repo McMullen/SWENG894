@@ -1,6 +1,7 @@
 const GrowthModel = require('../models/GrowthModel');
 const BabyModel = require('../models/BabyModel');
 const CDCModel = require('../models/CDCModel');
+const TrainingModel = require('../models/TrainingModel');
 const authService = require('../services/authService');
 const tf = require('@tensorflow/tfjs');
 
@@ -69,8 +70,23 @@ exports.getAllGrowths = async(req, res) => {
     }
 };
 
-exports.getCDCData = async(req, res) => {
+const getRecentGrowths = async (babyId) => {
     try {
+        const recentGrowth = await GrowthModel.findOne({
+            where: { babyId: babyId },
+            order: [['date', 'DESC']] 
+        });
+        return recentGrowth;
+    } catch (error) {
+        console.error("Error retrieving recent growths:", error);
+        return null;
+    }
+};
+
+exports.getPredcitedHeight = async(req, res) => {
+    try {
+        const { babyId } = req.params;
+
         const data = await CDCModel.findAll({
             attributes: ['Age', '3rd', '5th', '10th', '25th', '50th', '75th', '90th', '95th', '97th'],
             where: {Sex: 'M'},
@@ -78,15 +94,20 @@ exports.getCDCData = async(req, res) => {
         });
         const cdcData = data.map(entry => entry.get({ plain: true }));
 
-        // Finding corresponding CDC data for the current age
-        const currentAge = 24.5;
-        const currentHeight = 84;
-        const currentCdcData = cdcData.find(entry => entry.Age === currentAge);
+        const tD = await TrainingModel.findAll({
+            attributes: ['age', 'futureAge', 'height', 'futureHeight', 'percentiles', 'futurePercentiles'],
+            where: {sex: 'M'},
+            order: [['age', 'ASC']]
+        });
+        const trainingData = tD.map(entry => entry.get({ plain: true }));
 
-        // Finding corresponding CDC data for the future age
-        const futureAge = 30.5;
-        const futureHeight = 91;
-        const futureCdcData = cdcData.find(entry => entry.Age === futureAge);
+        // Gathering training data for model
+        const currentAge = trainingData.age;
+        const currentHeight = trainingData.height;
+        const currentCdcData = trainingData.percentiles;
+        const futureAge = trainingData.futureAge;
+        const futureHeight = trainingData.futureHeight;
+        const futureCdcData = trainingData.futurePercentiles;
 
         // Constructing the feature vector
         const currentPercentiles = [
@@ -106,7 +127,7 @@ exports.getCDCData = async(req, res) => {
 
         // Create the model
         const model = tf.sequential();
-        model.add(tf.layers.dense({ inputShape: [21], units: 10, activation: 'relu' }));
+        model.add(tf.layers.dense({ inputShape: [21], units: 64, activation: 'relu' }));
         model.add(tf.layers.dense({ units: 1 }));
         model.compile({
             optimizer: 'adam',
@@ -124,11 +145,16 @@ exports.getCDCData = async(req, res) => {
             validationSplit: 0.2
         });
 
-        const newFeatureArray = [25.5, 81, ...currentPercentiles, futureAge, ...futurePercentiles];
+        recentGrowth = await getRecentGrowths(babyId);
+        currentAge = recentGrowth.age;
+        currentHeight = recentGrowth.height;
+        currentCdcData = cdcData.find(entry => entry.Age === currentAge);
+        futureAge = JSON.parse(req.query.futureAge);
+
+        const newFeatureArray = [currentAge, currentHeight, ...currentPercentiles, futureAge, ...futurePercentiles];
         const newFeatures = tf.tensor2d([newFeatureArray]);
         const predictedHeight = model.predict(newFeatures);
         predictedHeight.data().then(data => {
-            console.log('Predicted Future Height:', data[0]);
             res.json({ predictedHeight: data[0] });
         });
     } catch (error) {
